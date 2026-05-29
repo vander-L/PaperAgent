@@ -1,0 +1,19 @@
+server:
+  address: ":6372"
+
+llm:
+  chat:
+    api_key: "${PAPER_AGENT_CHAT_API_KEY}"
+    base_url: "${PAPER_AGENT_CHAT_BASE_URL}"
+    model: "${PAPER_AGENT_CHAT_MODEL}"
+  embedder:
+    api_key: "${PAPER_AGENT_EMBEDDING_API_KEY}"
+    base_url: "${PAPER_AGENT_EMBEDDING_BASE_URL}"
+    model: "${PAPER_AGENT_EMBEDDING_MODEL}"
+    dimension: 1024
+
+milvus:
+  address: "${MILVUS_ADDRESS}"
+  database: "${MILVUS_DB}"
+  collection: "${MILVUS_COLLECTION}"
+  dimension: 1024
