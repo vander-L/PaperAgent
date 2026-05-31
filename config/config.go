@@ -5,6 +5,7 @@ type Config struct {
 	Server ServerConfig `mapstructure:"server"`
 	LLM    LLMConfig    `mapstructure:"llm"`
 	Milvus MilvusConfig `mapstructure:"milvus"`
+	MCP    MCPConfig    `mapstructure:"mcp"`
 }
 
 type ServerConfig struct {
@@ -34,4 +35,8 @@ type MilvusConfig struct {
 	Database   string `mapstructure:"database"`
 	Collection string `mapstructure:"collection"`
 	Dimension  int    `mapstructure:"dimension"`
+}
+
+type MCPConfig struct {
+	Url string `mapstructure:"url"`
 }

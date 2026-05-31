@@ -57,4 +57,10 @@ func NewMilvusClient(ctx context.Context) (cli.Client, error) {
 			break
 		}
 	}
+
+	if !paperCollectionExists {
+		panic("paper collection not found")
+	}
+	defaultClient.Close()
+	return agentClient, nil
 }

@@ -18,12 +18,15 @@ func Load() error {
 	v.SetConfigName("config")
 	v.SetConfigType("yaml")
 	v.AddConfigPath("./config")
+	v.AddConfigPath("./../config")
+	v.AddConfigPath("./../../config")
+	v.AddConfigPath("./../../../config")
 	v.AddConfigPath(".")
 
 	v.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 	v.AutomaticEnv()
 
-	if err := loadDotEnv(".env", v); err != nil {
+	if err := loadDotEnv(v); err != nil {
 		return err
 	}
 
@@ -40,13 +43,22 @@ func Load() error {
 	return v.Unmarshal(&AppConfig)
 }
 
-func loadDotEnv(path string, v *viper.Viper) error {
-	file, err := os.Open(path)
-	if err != nil {
-		if os.IsNotExist(err) {
-			return nil
+func loadDotEnv(v *viper.Viper) error {
+	paths := []string{".env", "../.env", "../../.env", "../../../.env"}
+	var file *os.File
+	for _, path := range paths {
+		f, err := os.Open(path)
+		if err != nil {
+			if os.IsNotExist(err) {
+				continue
+			}
+			return err
 		}
-		return err
+		file = f
+		break
+	}
+	if file == nil {
+		return nil
 	}
 	defer file.Close()
 

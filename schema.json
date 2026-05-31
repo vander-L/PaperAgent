@@ -1,0 +1,179 @@
+{
+  "collection_name": "paper",
+  "description": "",
+  "fields": [
+    {
+      "name": "id",
+      "data_type": 21,
+      "description": "主键ID",
+      "is_primary_key": true,
+      "max_length": 256
+    },
+    {
+      "name": "paper_id",
+      "data_type": 21,
+      "description": "论文唯一标识（如DOI，ArXiv ID）",
+      "is_primary_key": false,
+      "max_length": 128
+    },
+    {
+      "name": "title",
+      "data_type": 21,
+      "description": "论文标题",
+      "is_primary_key": false,
+      "max_length": 1024
+    },
+    {
+      "name": "authors",
+      "data_type": 21,
+      "description": "作者列表（JSON字符串存储）",
+      "is_primary_key": false,
+      "max_length": 2048
+    },
+    {
+      "name": "abstract",
+      "data_type": 21,
+      "description": "论文摘要",
+      "is_primary_key": false,
+      "max_length": 65535
+    },
+    {
+      "name": "title_vector",
+      "data_type": 101,
+      "description": "标题语义向量，用于论文查找",
+      "is_primary_key": false,
+      "dim": 1024,
+      "indexes": [
+        {
+          "index_name": "title_vector_index",
+          "index_type": "AUTOINDEX",
+          "metric_type": "COSINE"
+        }
+      ]
+    },
+    {
+      "name": "abstract_vector",
+      "data_type": 101,
+      "description": "摘要语义向量，用于内容总结和语义检索",
+      "is_primary_key": false,
+      "dim": 1024,
+      "indexes": [
+        {
+          "index_name": "abstract_vector_index",
+          "index_type": "AUTOINDEX",
+          "metric_type": "COSINE"
+        }
+      ]
+    },
+    {
+      "name": "topic_vector",
+      "data_type": 101,
+      "description": "主题/关键词语义向量，用于研究现状和创新点分析",
+      "is_primary_key": false,
+      "dim": 1024,
+      "indexes": [
+        {
+          "index_name": "topic_vector_index",
+          "index_type": "AUTOINDEX",
+          "metric_type": "COSINE"
+        }
+      ]
+    },
+    {
+      "name": "keywords",
+      "data_type": 22,
+      "description": "关键词列表（Array<VarChar>）",
+      "is_primary_key": false,
+      "max_length": 256,
+      "element_type": 21,
+      "max_capacity": 50
+    },
+    {
+      "name": "publication_year",
+      "data_type": 4,
+      "description": "发表年份，用于时间维度筛选",
+      "is_primary_key": false
+    },
+    {
+      "name": "citation_count",
+      "data_type": 4,
+      "description": "引用次数，用于评估论文影响力",
+      "is_primary_key": false
+    },
+    {
+      "name": "venue",
+      "data_type": 21,
+      "description": "发表会议/期刊名称",
+      "is_primary_key": false,
+      "max_length": 256
+    },
+    {
+      "name": "full_text",
+      "data_type": 21,
+      "description": "论文全文（可分块存储）",
+      "is_primary_key": false,
+      "max_length": 65535
+    },
+    {
+      "name": "full_text_vector",
+      "data_type": 101,
+      "description": "全文语义向量（每段/每块），用于深度内容检索",
+      "is_primary_key": false,
+      "dim": 1024,
+      "indexes": [
+        {
+          "index_name": "full_text_vector_index",
+          "index_type": "AUTOINDEX",
+          "metric_type": "COSINE"
+        }
+      ]
+    },
+    {
+      "name": "references",
+      "data_type": 21,
+      "description": "参考文献列表（JSON格式存储论文ID/标题/作者）",
+      "is_primary_key": false,
+      "max_length": 65535
+    },
+    {
+      "name": "methodology",
+      "data_type": 21,
+      "description": "研究方法（如Transformer、CNN）",
+      "is_primary_key": false,
+      "max_length": 8192
+    },
+    {
+      "name": "dataset_info",
+      "data_type": 21,
+      "description": "使用的数据集信息",
+      "is_primary_key": false,
+      "max_length": 4096
+    },
+    {
+      "name": "innovation_points",
+      "data_type": 21,
+      "description": "论文的创新点摘要",
+      "is_primary_key": false,
+      "max_length": 8192
+    },
+    {
+      "name": "field",
+      "data_type": 21,
+      "description": "研究领域（如NLP、CV、GNN）",
+      "is_primary_key": false,
+      "max_length": 256
+    },
+    {
+      "name": "metadata",
+      "data_type": 23,
+      "description": "扩展元数据（灵活存储其他属性）",
+      "is_primary_key": false
+    }
+  ],
+  "functions": [],
+  "consistency_level": "Bounded",
+  "shards_num": 1,
+  "properties": {
+    "timezone": "UTC"
+  }
+}

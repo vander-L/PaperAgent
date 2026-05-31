@@ -17,3 +17,8 @@ milvus:
   database: "${MILVUS_DB}"
   collection: "${MILVUS_COLLECTION}"
   dimension: 1024
+
+mcp:
+  url: "http://localhost:3000/sse"
+
+file_dir: "E:/project/go/PaperAgent/papers"
